@@ -327,4 +327,65 @@
   }
 
   function sendMessage() {
-    const msgInput
+    const msgInput = document.getElementById('msg-input');
+    const msg = msgInput.value.trim();
+    
+    if(msg === "") return;
+    
+    const messages = JSON.parse(localStorage.getItem('siteMessages') || '[]');
+    const newMsg = {
+      text: msg,
+      time: new Date().toLocaleString('en-PH', { 
+        month: 'short', 
+        day: 'numeric', 
+        hour: '2-digit', 
+        minute: '2-digit' 
+      })
+    };
+    
+    messages.unshift(newMsg);
+    localStorage.setItem('siteMessages', JSON.stringify(messages));
+    msgInput.value = "";
+    loadMessages();
+  }
+
+  function loadMessages() {
+    const container = document.getElementById('messages-container');
+    const messages = JSON.parse(localStorage.getItem('siteMessages') || '[]');
+    
+    if(messages.length === 0) {
+      container.innerHTML = '<p style="color:rgba(255,255,255,0.6); text-align:center; font-size:13px;">No messages yet</p>';
+      return;
+    }
+    
+    container.innerHTML = messages.map(m => `
+      <div class="msg-item">
+        <div>${m.text}</div>
+        <div class="msg-time">${m.time}</div>
+      </div>
+    `).join('');
+  }
+
+  function clearMessages() {
+    if(confirm('Delete all message logs?')) {
+      localStorage.removeItem('siteMessages');
+      loadMessages();
+    }
+  }
+  
+  document.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      if(document.getElementById('login-card').classList.contains('hidden')) {
+        if(document.activeElement.id === 'msg-input') {
+          e.preventDefault();
+          sendMessage();
+        }
+      } else {
+        doLogin();
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
