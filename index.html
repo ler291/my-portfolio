@@ -1,136 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Roblox Accounts</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: Arial, sans-serif; 
-      background: #0d1117; 
-      color: #c9d1d9; 
-      padding: 40px 20px;
-      min-height: 100vh;
-    }
-    .container {
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    h1 { 
-      color: #58a6ff; 
-      text-align: center;
-      margin-bottom: 10px;
-      font-size: 28px;
-    }
-    .subtitle {
-      text-align: center;
-      color: #8b949e;
-      margin-bottom: 30px;
-    }
-    .main-card {
-      background: #161b22;
-      padding: 30px;
-      border-radius: 12px;
-      border: 1px solid #30363d;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    }
-    .username-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .username-item {
-      background: #0d1117;
-      padding: 15px;
-      border-radius: 8px;
-      border: 1px solid #30363d;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .name {
-      font-size: 16px;
-      font-weight: 600;
-    }
-    .tag {
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 11px;
-      font-weight: 600;
-    }
-    .tag-main { background: #238636; }
-    .tag-alt { background: #1f6feb; }
-    .tag-old { background: #9e6a03; }
-    .disclaimer {
-      text-align: center;
-      margin-top: 25px;
-      color: #6e7681;
-      font-size: 11px;
-      line-height: 1.5;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>🎮 ROBLOX ACCOUNTS</h1>
-    <p class="subtitle">Personal account list</p>
-    
-    <div class="main-card">
-      <div class="username-list">
-        
-        <div class="username-item">
-          <span class="name">UsernameMo1</span>
-          <span class="tag tag-main">MAIN</span>
-        </div>
-        
-        <div class="username-item">
-          <span class="name">UsernameMo2</span>
-          <span class="tag tag-alt">ALT</span>
-        </div>
-        
-        <div class="username-item">
-          <span class="name">UsernameMo3</span>
-          <span class="tag tag-alt">ALT</span>
-        </div>
-        
-        <div class="username-item">
-          <span class="name">UsernameMo4</span>
-          <span class="tag tag-old">OLD</span>
-        </div>
-        
-      </div>
-      
-      <div class="disclaimer">
-        * For display purposes only<br>
-        This is not a login page. No passwords stored.
-      </div>
-    </div>
-  </div>
-</body>
-</html>
-<div class="username-item">
-  <span class="name">Wilbert_Gimoro12</span>
-  <span class="tag tag-alt">ALT</span>
-</div>
-<!DOCTYPE html>
 <html>
 <head>
-  <title>Private</title>
+  <title>My Web - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { background: #0d1117; color: #c9d1d9; font-family: Arial; padding: 40px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+    h2 { text-align: center; margin-bottom: 20px; }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 6px;
+      background: #334155;
+      color: white;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #3b82f6;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover { background: #2563eb; }
+    #error { color: #f87171; text-align: center; margin-top: 10px; }
     .hidden { display: none; }
-    button { background: #238636; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; }
+    
+    /* Account Center styles */
+    .stat {
+      background: #334155;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+    .stat span { color: #94a3b8; font-size: 14px; }
+    .logout { background: #ef4444; margin-top: 20px; }
+    .logout:hover { background: #dc2626; }
+    .badge { 
+      background: #22c55e; 
+      padding: 4px 8px; 
+      border-radius: 4px; 
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
-  <h1>My Private Notes</h1>
-  <button onclick="document.getElementById('list').style.display='block'">Show List</button>
-  
-  <div id="list" class="hidden">
-    <p>Wilbert_Gimoro12</p>
-    <p>UsernameMo2</p>
-    <p>UsernameMo3</p>
+
+  <!-- LOGIN SCREEN -->
+  <div id="login-card" class="card">
+    <h2>🔒 Member Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="doLogin()">Sign In</button>
+    <p id="error"></p>
+    <p style="text-align:center; font-size:12px; color:#94a3b8; margin-top:20px;">
+      Hint: admin / 1234
+    </p>
   </div>
+
+  <!-- PROTECTION ACCOUNT CENTER -->
+  <div id="dashboard" class="card hidden">
+    <h2>🛡️ Protection Account Center</h2>
+    <p>Welcome back, <strong id="user-display">Admin</strong> <span class="badge">VERIFIED</span></p>
+    
+    <div class="stat">
+      <span>Account Status</span>
+      <h3>Active & Protected</h3>
+    </div>
+    
+    <div class="stat">
+      <span>Security Level</span>
+      <h3>Maximum 🔐</h3>
+    </div>
+    
+    <div class="stat">
+      <span>Last Login</span>
+      <h3>April 26, 2026 - Quezon City</h3>
+    </div>
+
+    <div class="stat">
+      <span>Protected Assets</span>
+      <h3>3 Devices Secured</h3>
+    </div>
+    
+    <button class="logout" onclick="doLogout()">Logout</button>
+  </div>
+
+<script>
+  function doLogin() {
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+    
+    // Palitan mo yung "admin" at "1234" kung gusto mo
+    if(user === "admin" && pass === "1234") {
+      document.getElementById('login-card').classList.add('hidden');
+      document.getElementById('dashboard').classList.remove('hidden');
+      document.getElementById('user-display').innerText = user;
+      document.getElementById('error').innerText = "";
+    } else {
+      document.getElementById('error').innerText = "Invalid credentials!";
+    }
+  }
+
+  function doLogout() {
+    document.getElementById('dashboard').classList.add('hidden');
+    document.getElementById('login-card').classList.remove('hidden');
+    document.getElementById('username').value = "";
+    document.getElementById('password').value = "";
+  }
+</script>
+
 </body>
 </html>
