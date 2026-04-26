@@ -20,9 +20,8 @@
       align-items: center;
       padding: 20px;
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden;
     }
-    /* Animated background circles */
     body::before, body::after {
       content: '';
       position: absolute;
@@ -50,12 +49,12 @@
     
     .container {
       width: 100%;
-      max-width: 440px;
+      max-width: 480px;
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 20px;
-      padding: 40px 35px;
+      padding: 35px 30px;
       box-shadow: 0 20px 50px rgba(0,0,0,0.2);
       z-index: 1;
     }
@@ -70,12 +69,10 @@
       color: rgba(255,255,255,0.8);
       text-align: center;
       font-size: 14px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
-    .input-group {
-      margin-bottom: 18px;
-    }
-    input {
+    .input-group { margin-bottom: 15px; }
+    input, textarea {
       width: 100%;
       padding: 14px 18px;
       background: rgba(255,255,255,0.2);
@@ -85,9 +82,10 @@
       font-size: 15px;
       outline: none;
       transition: 0.3s;
+      resize: none;
     }
-    input::placeholder { color: rgba(255,255,255,0.7); }
-    input:focus {
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.7); }
+    input:focus, textarea:focus {
       background: rgba(255,255,255,0.25);
       border-color: rgba(255,255,255,0.5);
     }
@@ -108,6 +106,11 @@
       transform: translateY(-2px);
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
+    .btn-small {
+      padding: 10px;
+      font-size: 14px;
+      margin-top: 8px;
+    }
     #error {
       color: #ff6b6b;
       text-align: center;
@@ -118,15 +121,36 @@
     .hidden { display: none; }
     
     /* Dashboard styles */
-    .header {
-      text-align: center;
-      margin-bottom: 25px;
+    .header { text-align: center; margin-bottom: 20px; }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
     }
+    .tab {
+      flex: 1;
+      padding: 10px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .tab.active {
+      background: white;
+      color: #667eea;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    
     .stats-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
     .stat-box {
       background: rgba(255,255,255,0.2);
@@ -143,12 +167,12 @@
       font-size: 20px;
       margin-top: 5px;
     }
-    .user-list {
+    .user-list, .msg-list {
       background: rgba(0,0,0,0.2);
       border-radius: 14px;
       padding: 18px;
-      margin: 20px 0;
-      max-height: 220px;
+      margin: 15px 0;
+      max-height: 200px;
       overflow-y: auto;
     }
     .list-title {
@@ -158,15 +182,28 @@
       margin-bottom: 12px;
       letter-spacing: 0.5px;
     }
+    .user-item, .msg-item {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .user-item:last-child, .msg-item:last-child { border-bottom: none; }
     .user-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-    .user-item:last-child { border-bottom: none; }
-    .user-item span { color: white; font-size: 14px; }
+    .user-item span, .msg-item { color: white; font-size: 14px; }
+    .msg-item { 
+      background: rgba(255,255,255,0.1);
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .msg-time {
+      color: rgba(255,255,255,0.6);
+      font-size: 11px;
+      margin-top: 4px;
+    }
     .badge {
       background: #10b981;
       padding: 4px 10px;
@@ -180,9 +217,8 @@
     }
     .logout:hover { background: rgba(220, 38, 38, 1); }
     
-    /* Scrollbar */
-    .user-list::-webkit-scrollbar { width: 5px; }
-    .user-list::-webkit-scrollbar-thumb {
+    .user-list::-webkit-scrollbar, .msg-list::-webkit-scrollbar { width: 5px; }
+    .user-list::-webkit-scrollbar-thumb, .msg-list::-webkit-scrollbar-thumb {
       background: rgba(255,255,255,0.3);
       border-radius: 10px;
     }
@@ -211,65 +247,65 @@
       <p class="subtitle">Welcome, <strong id="user-display">Admin</strong></p>
     </div>
     
-    <div class="stats-grid">
-      <div class="stat-box">
-        <span>SECURED</span>
-        <h3>7</h3>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('accounts')">Accounts</button>
+      <button class="tab" onclick="switchTab('messages')">Messages</button>
+    </div>
+
+    <!-- ACCOUNTS TAB -->
+    <div id="accounts-tab" class="tab-content active">
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span>SECURED</span>
+          <h3 id="account-count">7</h3>
+        </div>
+        <div class="stat-box">
+          <span>STATUS</span>
+          <h3>Active</h3>
+        </div>
       </div>
-      <div class="stat-box">
-        <span>STATUS</span>
-        <h3>Active</h3>
+      
+      <div class="user-list">
+        <div class="list-title">PROTECTED ACCOUNTS</div>
+        <div class="user-item"><span>ShadowStriker_X</span><span class="badge">LIVE</span></div>
+        <div class="user-item"><span>PixelMaster99</span><span class="badge">LIVE</span></div>
+        <div class="user-item"><span>DarkPhoenixPH</span><span class="badge">LIVE</span></div>
+        <div class="user-item"><span>NeoBlade_2026</span><span class="badge">LIVE</span></div>
+        <div class="user-item"><span>FrostQueenQC</span><span class="badge">LIVE</span></div>
+        <div class="user-item"><span>VortexGamer7</span><span class="badge">LIVE</span></div>
+        <div class="user-item"><span>AlphaWolf_King</span><span class="badge">LIVE</span></div>
       </div>
     </div>
-    
-    <div class="user-list">
-      <div class="list-title">PROTECTED ACCOUNTS</div>
+
+    <!-- MESSAGES TAB -->
+    <div id="messages-tab" class="tab-content">
+      <div class="input-group">
+        <textarea id="msg-input" rows="3" placeholder="Type your message here..."></textarea>
+      </div>
+      <button class="btn btn-small" onclick="sendMessage()">Send Message</button>
       
-      <!-- PALITAN MO MGA USERNAME DITO -->
-      <div class="user-item">
-        <span>ShadowStriker_X</span>
-        <span class="badge">LIVE</span>
+      <div class="msg-list" id="msg-list">
+        <div class="list-title">MESSAGE LOGS</div>
+        <div id="messages-container"></div>
       </div>
-      <div class="user-item">
-        <span>PixelMaster99</span>
-        <span class="badge">LIVE</span>
-      </div>
-      <div class="user-item">
-        <span>DarkPhoenixPH</span>
-        <span class="badge">LIVE</span>
-      </div>
-      <div class="user-item">
-        <span>NeoBlade_2026</span>
-        <span class="badge">LIVE</span>
-      </div>
-      <div class="user-item">
-        <span>FrostQueenQC</span>
-        <span class="badge">LIVE</span>
-      </div>
-      <div class="user-item">
-        <span>VortexGamer7</span>
-        <span class="badge">LIVE</span>
-      </div>
-      <div class="user-item">
-        <span>AlphaWolf_King</span>
-        <span class="badge">LIVE</span>
-      </div>
+      <button class="btn btn-small" style="background:rgba(239,68,68,0.8);" onclick="clearMessages()">Clear All Logs</button>
     </div>
     
     <button class="btn logout" onclick="doLogout()">End Session</button>
   </div>
 
 <script>
+  // Login: admin / 1234
   function doLogin() {
     const user = document.getElementById('username').value;
     const pass = document.getElementById('password').value;
     
-    // Login: admin / 1234
-    if(user === "admin" && pass === "09483132031") {
+    if(user === "admin" && pass === "1234") {
       document.getElementById('login-card').classList.add('hidden');
       document.getElementById('dashboard').classList.remove('hidden');
       document.getElementById('user-display').innerText = user;
       document.getElementById('error').innerText = "";
+      loadMessages();
     } else {
       document.getElementById('error').innerText = "Invalid credentials. Try again.";
     }
@@ -281,12 +317,14 @@
     document.getElementById('username').value = "";
     document.getElementById('password').value = "";
   }
-  
-  // Enter key para mag-login
-  document.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') doLogin();
-  });
-</script>
 
-</body>
-</html>
+  function switchTab(tab) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    
+    event.target.classList.add('active');
+    document.getElementById(tab + '-tab').classList.add('active');
+  }
+
+  function sendMessage() {
+    const msgInput
