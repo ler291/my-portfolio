@@ -19,7 +19,7 @@
       padding: 30px;
       border-radius: 12px;
       width: 90%;
-      max-width: 400px;
+      max-width: 450px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
     h2 { text-align: center; margin-bottom: 20px; }
@@ -55,15 +55,30 @@
       border-radius: 8px;
       margin: 10px 0;
     }
-    .stat span { color: #94a3b8; font-size: 14px; }
-    .logout { background: #ef4444; margin-top: 20px; }
-    .logout:hover { background: #dc2626; }
+    .user-list {
+      background: #334155;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .user-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #475569;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .user-item:last-child { border-bottom: none; }
     .badge { 
       background: #22c55e; 
-      padding: 4px 8px; 
+      padding: 3px 8px; 
       border-radius: 4px; 
-      font-size: 12px;
+      font-size: 11px;
     }
+    .logout { background: #ef4444; margin-top: 20px; }
+    .logout:hover { background: #dc2626; }
   </style>
 </head>
 <body>
@@ -73,36 +88,57 @@
     <h2>🔒 Member Login</h2>
     <input type="text" id="username" placeholder="Username">
     <input type="password" id="password" placeholder="Password">
-    <button onclick="doLogin()">Sign In</button>
+    <button onclick="doLogin()">Access Center</button>
     <p id="error"></p>
-    <p style="text-align:center; font-size:12px; color:#94a3b8; margin-top:20px;">
-      Hint: admin / 1234
-    </p>
   </div>
 
   <!-- PROTECTION ACCOUNT CENTER -->
   <div id="dashboard" class="card hidden">
     <h2>🛡️ Protection Account Center</h2>
-    <p>Welcome back, <strong id="user-display">Admin</strong> <span class="badge">VERIFIED</span></p>
+    <p>Welcome, <strong id="user-display">Admin</strong></p>
     
     <div class="stat">
-      <span>Account Status</span>
-      <h3>Active & Protected</h3>
+      <span>Total Secured Accounts</span>
+      <h3>7 Active</h3>
+    </div>
+    
+    <div class="user-list">
+      <div style="color:#94a3b8; font-size:14px; margin-bottom:10px;">PROTECTED USER LIST:</div>
+      
+      <!-- DITO MO LAGAY MGA USERNAME -->
+      <div class="user-item">
+        <span>ShadowStriker_X</span>
+        <span class="badge">SECURED</span>
+      </div>
+      <div class="user-item">
+        <span>PixelMaster99</span>
+        <span class="badge">SECURED</span>
+      </div>
+      <div class="user-item">
+        <span>DarkPhoenixPH</span>
+        <span class="badge">SECURED</span>
+      </div>
+      <div class="user-item">
+        <span>NeoBlade_2026</span>
+        <span class="badge">SECURED</span>
+      </div>
+      <div class="user-item">
+        <span>FrostQueenQC</span>
+        <span class="badge">SECURED</span>
+      </div>
+      <div class="user-item">
+        <span>VortexGamer7</span>
+        <span class="badge">SECURED</span>
+      </div>
+      <div class="user-item">
+        <span>AlphaWolf_King</span>
+        <span class="badge">SECURED</span>
+      </div>
     </div>
     
     <div class="stat">
-      <span>Security Level</span>
-      <h3>Maximum 🔐</h3>
-    </div>
-    
-    <div class="stat">
-      <span>Last Login</span>
-      <h3>April 26, 2026 - Quezon City</h3>
-    </div>
-
-    <div class="stat">
-      <span>Protected Assets</span>
-      <h3>3 Devices Secured</h3>
+      <span>Security Status</span>
+      <h3>All Accounts Protected 🔐</h3>
     </div>
     
     <button class="logout" onclick="doLogout()">Logout</button>
@@ -113,7 +149,7 @@
     const user = document.getElementById('username').value;
     const pass = document.getElementById('password').value;
     
-    // Palitan mo yung "admin" at "1234" kung gusto mo
+    // Login: admin / 1234
     if(user === "admin" && pass === "1234") {
       document.getElementById('login-card').classList.add('hidden');
       document.getElementById('dashboard').classList.remove('hidden');
