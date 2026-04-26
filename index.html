@@ -3,56 +3,113 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ler291 | Coding Portfolio</title>
+  <title>My Roblox Accounts</title>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
       font-family: Arial, sans-serif; 
       background: #0d1117; 
       color: #c9d1d9; 
-      text-align: center; 
-      padding: 40px 20px; 
-      margin: 0;
+      padding: 40px 20px;
+      min-height: 100vh;
     }
-    h1 { color: #58a6ff; margin-bottom: 10px; }
-    p { color: #8b949e; }
-    .card { 
-      background: #161b22; 
-      padding: 25px; 
-      margin: 20px auto; 
-      max-width: 500px; 
-      border-radius: 10px;
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    h1 { 
+      color: #58a6ff; 
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #8b949e;
+      margin-bottom: 30px;
+    }
+    .main-card {
+      background: #161b22;
+      padding: 30px;
+      border-radius: 12px;
       border: 1px solid #30363d;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     }
-    .tag { 
-      background: #238636; 
-      padding: 5px 10px; 
-      border-radius: 15px; 
-      font-size: 12px;
-      margin: 5px;
-      display: inline-block;
+    .username-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
-    footer { margin-top: 40px; color: #6e7681; font-size: 14px; }
+    .username-item {
+      background: #0d1117;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #30363d;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .name {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .tag {
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .tag-main { background: #238636; }
+    .tag-alt { background: #1f6feb; }
+    .tag-old { background: #9e6a03; }
+    .disclaimer {
+      text-align: center;
+      margin-top: 25px;
+      color: #6e7681;
+      font-size: 11px;
+      line-height: 1.5;
+    }
   </style>
 </head>
 <body>
-  <h1>👋 Hi, I'm Ler291</h1>
-  <p>Welcome to my coding portfolio</p>
-  
-  <div class="card">
-    <h3>🚧 Current Projects</h3>
-    <p>I'm currently learning web development</p>
-    <span class="tag">Calculator App</span>
-    <span class="tag">To-Do List</span>
-    <span class="tag">Weather Widget</span>
+  <div class="container">
+    <h1>🎮 ROBLOX ACCOUNTS</h1>
+    <p class="subtitle">Personal account list</p>
+    
+    <div class="main-card">
+      <div class="username-list">
+        
+        <div class="username-item">
+          <span class="name">UsernameMo1</span>
+          <span class="tag tag-main">MAIN</span>
+        </div>
+        
+        <div class="username-item">
+          <span class="name">UsernameMo2</span>
+          <span class="tag tag-alt">ALT</span>
+        </div>
+        
+        <div class="username-item">
+          <span class="name">UsernameMo3</span>
+          <span class="tag tag-alt">ALT</span>
+        </div>
+        
+        <div class="username-item">
+          <span class="name">UsernameMo4</span>
+          <span class="tag tag-old">OLD</span>
+        </div>
+        
+      </div>
+      
+      <div class="disclaimer">
+        * For display purposes only<br>
+        This is not a login page. No passwords stored.
+      </div>
+    </div>
   </div>
-
-  <div class="card">
-    <h3>📚 About Me</h3>
-    <p>Student developer interested in HTML, CSS, and JavaScript. This site showcases my coding practice projects.</p>
-  </div>
-
-  <footer>
-    <p>© 2026 Ler291. Personal portfolio site.</p>
-  </footer>
 </body>
 </html>
+<div class="username-item">
+  <span class="name">Wilbert_Gimoro12</span>
+  <span class="tag tag-alt">ALT</span>
+</div>
