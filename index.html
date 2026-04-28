@@ -15,97 +15,36 @@
       min-height: 100vh; 
       padding: 20px;
     }
+    /* LOGIN - Roblox Style */
     .login-container { 
       background: #393b3d; 
       width: 100%; 
       max-width: 400px; 
       border-radius: 8px; 
-      overflow: hidden;
       border: 1px solid #565a5c;
     }
-    .login-header {
-      background: #232527;
-      padding: 20px;
-      text-align: center;
-      border-bottom: 1px solid #565a5c;
-    }
-    .roblox-logo {
-      font-size: 28px;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
-    .roblox-logo span { color: #fff; }
+    .login-header { background: #232527; padding: 20px; text-align: center; border-bottom: 1px solid #565a5c; }
+    .roblox-logo { font-size: 28px; font-weight: 900; }
     .login-body { padding: 24px; }
-    .login-body h2 { 
-      font-size: 20px; 
-      font-weight: 700; 
-      margin-bottom: 20px; 
-      text-align: center;
-    }
+    .login-body h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; text-align: center; }
     .input-group { margin-bottom: 16px; }
-    .input-group label { 
-      display: block; 
-      font-size: 12px; 
-      font-weight: 600; 
-      margin-bottom: 6px; 
-      color: #bdbebe;
-      text-transform: uppercase;
-    }
-    .input-group input { 
-      width: 100%; 
-      padding: 8px 12px; 
-      background: #232527; 
-      border: 1px solid #565a5c; 
-      border-radius: 4px; 
-      color: #fff; 
-      font-size: 16px;
-      height: 38px;
-    }
-    .input-group input:focus { 
-      outline: none; 
-      border-color: #00a2ff; 
-    }
-    .login-btn { 
-      width: 100%; 
-      padding: 8px; 
-      background: #393b3d; 
-      border: 1px solid #565a5c; 
-      border-radius: 4px; 
-      color: #bdbebe; 
-      font-size: 16px; 
-      font-weight: 600; 
-      cursor: pointer; 
-      height: 38px;
-      margin-top: 8px;
-    }
+    .input-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px; color: #bdbebe; text-transform: uppercase; }
+    .input-group input { width: 100%; padding: 8px 12px; background: #232527; border: 1px solid #565a5c; border-radius: 4px; color: #fff; font-size: 16px; height: 38px; }
+    .login-btn { width: 100%; padding: 8px; background: #393b3d; border: 1px solid #565a5c; border-radius: 4px; color: #bdbebe; font-size: 16px; font-weight: 600; cursor: pointer; height: 38px; }
     .login-btn:hover { background: #46494c; }
-    .login-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .error-msg { 
-      color: #f44336; 
-      font-size: 14px; 
-      text-align: center; 
-      margin-top: 12px; 
-      min-height: 20px;
-    }
-    .footer-text { 
-      text-align: center; 
-      font-size: 12px; 
-      color: #bdbebe; 
-      margin-top: 20px;
-      padding: 0 24px 24px 24px;
-    }
-    .footer-text a { color: #00a2ff; text-decoration: none; }
+    .error-msg { color: #f44336; font-size: 14px; text-align: center; margin-top: 12px; min-height: 20px; }
+    .footer-text { text-align: center; font-size: 12px; color: #bdbebe; margin-top: 20px; padding: 0 24px 24px 24px; }
     
-    /* Vault Content */
+    /* DASHBOARD - BAGONG LOOB */
     .hidden { display: none; }
-    .vault-container { 
+    .dashboard { 
       background: #393b3d; 
       width: 100%; 
-      max-width: 500px; 
+      max-width: 900px; 
       border-radius: 8px; 
       border: 1px solid #565a5c;
     }
-    .vault-header { 
+    .dash-header { 
       background: #232527; 
       padding: 16px 20px; 
       border-bottom: 1px solid #565a5c; 
@@ -113,89 +52,68 @@
       justify-content: space-between; 
       align-items: center;
     }
-    .vault-header h3 { font-size: 18px; }
-    .logout-btn { 
-      background: #232527; 
-      border: 1px solid #565a5c; 
-      color: #fff; 
-      padding: 6px 12px; 
-      border-radius: 4px; 
-      cursor: pointer; 
-      font-size: 14px;
+    .dash-header h3 { font-size: 18px; }
+    .dash-stats { display: flex; gap: 20px; font-size: 14px; color: #bdbebe; }
+    .dash-stats span { color: #00a2ff; font-weight: 700; }
+    .logout-btn { background: #232527; border: 1px solid #565a5c; color: #fff; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+    .dash-body { padding: 20px; }
+    .toolbar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .toolbar input, .toolbar select { 
+      flex: 1; min-width: 150px;
+      padding: 8px 12px; background: #232527; border: 1px solid #565a5c; border-radius: 4px; color: #fff; 
     }
-    .vault-body { padding: 20px; }
-    .vault-body h4 { 
-      color: #00a2ff; 
-      margin: 16px 0 10px 0; 
-      font-size: 14px;
-      text-transform: uppercase;
+    .add-btn { padding: 8px 16px; background: #00a2ff; border: none; border-radius: 4px; color: #000; font-weight: 700; cursor: pointer; }
+    
+    .accounts-table { width: 100%; border-collapse: collapse; }
+    .accounts-table th { 
+      text-align: left; padding: 12px; background: #232527; 
+      font-size: 12px; text-transform: uppercase; color: #bdbebe; border-bottom: 1px solid #565a5c;
     }
-    .vault-body input, .vault-body textarea { 
-      width: 100%; 
-      padding: 8px 12px; 
-      background: #232527; 
-      border: 1px solid #565a5c; 
-      border-radius: 4px; 
-      color: #fff; 
-      margin: 6px 0; 
-      font-family: inherit;
+    .accounts-table td { padding: 12px; border-bottom: 1px solid #565a5c; font-size: 14px; }
+    .accounts-table tr:hover { background: #2f3234; }
+    .status { padding: 3px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+    .status-safe { background: #00a2ff; color: #000; }
+    .status-risk { background: #ff9800; color: #000; }
+    .status-compromised { background: #f44336; color: #fff; }
+    .action-btns { display: flex; gap: 6px; }
+    .copy-btn, .delete-btn { 
+      border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600;
     }
-    .add-btn { 
-      width: 100%; 
-      padding: 8px; 
-      background: #00a2ff; 
-      border: none; 
-      border-radius: 4px; 
-      color: #000; 
-      font-weight: 700; 
-      cursor: pointer; 
-      margin: 8px 0 16px 0;
+    .copy-btn { background: #393b3d; border: 1px solid #565a5c; color: #fff; }
+    .delete-btn { background: #f44336; color: #fff; }
+    .empty-state { text-align: center; padding: 40px; color: #7d8590; }
+    
+    /* MODAL */
+    .modal { 
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+      background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; z-index: 100;
     }
-    .entry { 
-      background: #232527; 
-      border: 1px solid #565a5c; 
-      padding: 12px; 
-      border-radius: 4px; 
-      margin: 8px 0; 
+    .modal-content { 
+      background: #393b3d; padding: 24px; border-radius: 8px; 
+      width: 90%; max-width: 400px; border: 1px solid #565a5c;
     }
-    .entry-header { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      margin-bottom: 6px; 
+    .modal-content h4 { margin-bottom: 16px; }
+    .modal-content input, .modal-content select, .modal-content textarea { 
+      width: 100%; padding: 8px 12px; background: #232527; border: 1px solid #565a5c; 
+      border-radius: 4px; color: #fff; margin-bottom: 12px; font-family: inherit;
     }
-    .entry-title { font-weight: 700; }
-    .delete-btn { 
-      background: #f44336; 
-      border: none; 
-      color: white; 
-      padding: 4px 8px; 
-      border-radius: 4px; 
-      cursor: pointer; 
-      font-size: 12px;
-    }
-    .badge { 
-      background: #00a2ff; 
-      color: #000; 
-      font-size: 10px; 
-      padding: 2px 6px; 
-      border-radius: 10px; 
-      margin-left: 6px; 
-      font-weight: 700;
-    }
+    .modal-btns { display: flex; gap: 10px; margin-top: 10px; }
+    .modal-btns button { flex: 1; padding: 8px; border-radius: 4px; cursor: pointer; font-weight: 600; }
+    .btn-save { background: #00a2ff; border: none; color: #000; }
+    .btn-cancel { background: #393b3d; border: 1px solid #565a5c; color: #fff; }
   </style>
 </head>
 <body>
-  <!-- LOGIN SCREEN - KAMUKHA NG ROBLOX -->
+  <!-- LOGIN -->
   <div class="login-container" id="login-box">
     <div class="login-header">
-      <div class="roblox-logo">🛡️ <span>NullDefender</span></div>
+      <div class="roblox-logo">🛡️ NullDefender</div>
     </div>
     <div class="login-body">
       <h2>Log In to Your Account</h2>
       <div class="input-group">
         <label>Username</label>
-        <input type="text" id="username" value="wilbert" disabled>
+        <input type="text" value="NullDefenderAdmin" disabled>
       </div>
       <div class="input-group">
         <label>Password</label>
@@ -204,66 +122,86 @@
       <button class="login-btn" onclick="unlock()">Log In</button>
       <p class="error-msg" id="error"></p>
     </div>
-    <div class="footer-text">
-      This is a private vault. Not affiliated with Roblox Corporation.<br>
-      FOR PERSONAL USE ONLY
+    <div class="footer-text">Private Database - Not affiliated with Roblox Corporation</div>
+  </div>
+
+  <!-- DASHBOARD - BAGONG LOOB -->
+  <div class="dashboard hidden" id="vault-content">
+    <div class="dash-header">
+      <h3>NullDefender Database</h3>
+      <div class="dash-stats">
+        Total: <span id="total-count">0</span> | 
+        Safe: <span id="safe-count">0</span>
+      </div>
+      <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+    <div class="dash-body">
+      <div class="toolbar">
+        <input type="text" id="search" placeholder="Search username..." oninput="renderTable()">
+        <select id="filter-status" onchange="renderTable()">
+          <option value="all">All Status</option>
+          <option value="Safe">Safe</option>
+          <option value="At Risk">At Risk</option>
+          <option value="Compromised">Compromised</option>
+        </select>
+        <button class="add-btn" onclick="openModal()">+ Add Account</button>
+      </div>
+      
+      <table class="accounts-table">
+        <thead>
+          <tr>
+            <th>Roblox Username</th>
+            <th>Owner / Notes</th>
+            <th>Date Added</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="accounts-body"></tbody>
+      </table>
+      <div id="empty-state" class="empty-state hidden">No accounts found. Add ka muna.</div>
     </div>
   </div>
 
-  <!-- VAULT CONTENT -->
-  <div class="vault-container hidden" id="vault-content">
-    <div class="vault-header">
-      <h3>🛡️ Protected Accounts</h3>
-      <button class="logout-btn" onclick="logout()">Log Out</button>
-    </div>
-    <div class="vault-body">
-      <h4>Roblox Usernames</h4>
-      <input type="text" id="rbx-user" placeholder="Roblox Username">
-      <textarea id="rbx-note" rows="2" placeholder="Notes: Status, owner, date"></textarea>
-      <button class="add-btn" onclick="addRbx()">Add Account</button>
-      <div id="rbx-list"></div>
-
-      <h4>Other Notes</h4>
-      <input type="text" id="note-title" placeholder="Title">
-      <textarea id="note-body" rows="2" placeholder="Details"></textarea>
-      <button class="add-btn" onclick="addNote()">Add Note</button>
-      <div id="notes-list"></div>
+  <!-- ADD/EDIT MODAL -->
+  <div class="modal hidden" id="modal">
+    <div class="modal-content">
+      <h4 id="modal-title">Add Protected Account</h4>
+      <input type="text" id="modal-username" placeholder="Roblox Username">
+      <input type="text" id="modal-owner" placeholder="Owner / Real Name">
+      <select id="modal-status">
+        <option value="Safe">Safe</option>
+        <option value="At Risk">At Risk</option>
+        <option value="Compromised">Compromised</option>
+      </select>
+      <textarea id="modal-notes" rows="3" placeholder="Notes: Email, last checked, etc."></textarea>
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+        <button class="btn-save" onclick="saveAccount()">Save</button>
+      </div>
     </div>
   </div>
 
 <script>
-  // === CONFIG MO DITO ===
-  const CORRECT_PASS = "wilbert123"; // Palitan mo to ng password na gusto mo
-  const DEFAULT_RBX = [
-    { title: "PlayerOne", body: "Main account - Protected since April 2026" },
-    { title: "AltAccount22", body: "Kaibigan ko - Status: Safe" }
-  ];
+  // === CONFIG ===
+  const CORRECT_PASS = "wilbert123"; // Palitan mo to
+  let editIndex = null;
   // === END CONFIG ===
 
   if(localStorage.getItem("nd_session") === "true") {
-    showVault();
-    initData();
-    loadAll();
+    showDashboard();
+    renderTable();
   }
 
   function unlock() {
     const pass = document.getElementById("password").value;
-    const btn = document.querySelector('.login-btn');
-    btn.disabled = true;
-    btn.innerText = "Logging in...";
-    
-    setTimeout(() => { // Fake loading para realistic
-      if(pass === CORRECT_PASS) {
-        localStorage.setItem("nd_session", "true");
-        showVault();
-        initData();
-        loadAll();
-      } else {
-        document.getElementById("error").innerText = "Incorrect username or password.";
-        btn.disabled = false;
-        btn.innerText = "Log In";
-      }
-    }, 800);
+    if(pass === CORRECT_PASS) {
+      localStorage.setItem("nd_session", "true");
+      showDashboard();
+      renderTable();
+    } else {
+      document.getElementById("error").innerText = "Incorrect username or password.";
+    }
   }
 
   function logout() {
@@ -271,97 +209,19 @@
     document.getElementById("login-box").classList.remove("hidden");
     document.getElementById("vault-content").classList.add("hidden");
     document.getElementById("password").value = "";
-    document.getElementById("error").innerText = "";
   }
 
-  function showVault() {
+  function showDashboard() {
     document.getElementById("login-box").classList.add("hidden");
     document.getElementById("vault-content").classList.remove("hidden");
   }
 
-  function initData() {
-    if(!localStorage.getItem("nd_rbx")) {
-      localStorage.setItem("nd_rbx", JSON.stringify(DEFAULT_RBX));
-    }
-    if(!localStorage.getItem("nd_notes")) {
-      localStorage.setItem("nd_notes", JSON.stringify([]));
-    }
+  function getAccounts() {
+    return JSON.parse(localStorage.getItem("nd_accounts") || "[]");
   }
 
-  function getData(key) {
-    return JSON.parse(localStorage.getItem(key) || "[]");
+  function saveAccounts(accounts) {
+    localStorage.setItem("nd_accounts", JSON.stringify(accounts));
   }
 
-  function saveData(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
-  }
-
-  function loadAll() {
-    loadList("nd_rbx", "rbx-list", "rbx");
-    loadList("nd_notes", "notes-list", "note");
-  }
-
-  function loadList(storageKey, listId, type) {
-    const items = getData(storageKey);
-    const list = document.getElementById(listId);
-    list.innerHTML = "";
-    
-    if(items.length === 0) {
-      list.innerHTML = "<p style='text-align: center; color: #7d8590; font-size: 14px;'>No entries.</p>";
-      return;
-    }
-
-    items.forEach((item, index) => {
-      const div = document.createElement("div");
-      div.className = "entry";
-      div.innerHTML = `
-        <div class="entry-header">
-          <span class="entry-title">${item.title} ${type === 'rbx' ? '<span class="badge">PROTECTED</span>' : ''}</span>
-          <button class="delete-btn" onclick="deleteItem('${storageKey}', ${index})">Delete</button>
-        </div>
-        <div>${item.body}</div>
-      `;
-      list.appendChild(div);
-    });
-  }
-
-  function addRbx() {
-    addItem("nd_rbx", "rbx-user", "rbx-note", "rbx-list", "rbx");
-  }
-
-  function addNote() {
-    addItem("nd_notes", "note-title", "note-body", "notes-list", "note");
-  }
-
-  function addItem(storageKey, titleId, bodyId, listId, type) {
-    const title = document.getElementById(titleId).value.trim();
-    const body = document.getElementById(bodyId).value.trim();
-    
-    if(!title || !body) return;
-
-    const items = getData(storageKey);
-    items.unshift({ title, body });
-    saveData(storageKey, items);
-    
-    document.getElementById(titleId).value = "";
-    document.getElementById(bodyId).value = "";
-    loadList(storageKey, listId, type);
-  }
-
-  function deleteItem(storageKey, index) {
-    if(!confirm("Delete this entry?")) return;
-    const items = getData(storageKey);
-    const type = storageKey === "nd_rbx" ? "rbx" : "note";
-    const listId = storageKey === "nd_rbx" ? "rbx-list" : "notes-list";
-    items.splice(index, 1);
-    saveData(storageKey, items);
-    loadList(storageKey, listId, type);
-  }
-
-  // Enter key para mag-login
-  document.getElementById("password").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") unlock();
-  });
-</script>
-</body>
-</html>
+  function render
