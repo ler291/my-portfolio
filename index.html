@@ -2,399 +2,52 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>NullDefender - Admin Login</title>
+  <title>NullDefender - Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #1a1d21;
-      font-family: Arial, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-  .login-card {
-      background: #2c2f33;
-      width: 100%;
-      max-width: 400px;
-      border-radius: 8px;
-      padding: 40px 32px;
-    }
-  .brand-title {
-      color: #00a8ff;
-      font-size: 36px;
-      font-weight: 800;
-      text-align: center;
-      margin-bottom: 8px;
-    }
-  .admin-text {
-      color: #ffffff;
-      font-size: 20px;
-      font-weight: 500;
-      text-align: center;
-      margin-bottom: 32px;
-    }
-  .form-label {
-      display: block;
-      color: #b9bbbe;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      margin-top: 16px;
-    }
-  .form-input {
-      width: 100%;
-      padding: 12px 14px;
-      background: #1e2124;
-      border: 2px solid #40444b;
-      border-radius: 6px;
-      color: #dcddde;
-      font-size: 16px;
-      height: 48px;
-    }
-  .form-input:focus {
-      outline: none;
-      border-color: #00a8ff;
-    }
-  .form-input:disabled {
-      background: #32353b;
-      color: #72767d;
-    }
-  .password-wrapper { position: relative; }
-  .eye-icon {
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      color: #72767d;
-      font-size: 20px;
-    }
-  .login-button {
-      width: 100%;
-      padding: 12px;
-      background: #00a8ff;
-      border: none;
-      border-radius: 6px;
-      color: #ffffff;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      height: 48px;
-      margin-top: 24px;
-    }
-  .login-button:hover { background: #0091db; }
-  .error-text {
-      color: #ed4245;
-      font-size: 14px;
-      text-align: center;
-      margin-top: 16px;
-      min-height: 20px;
-    }
-  .hidden { display: none; }
-  .dashboard {
-      background: #2c2f33;
-      width: 100%;
-      max-width: 900px;
-      border-radius: 8px;
-      padding: 0;
-    }
-  .dash-header {
-      background: #1a1d21;
-      padding: 20px 28px;
-      border-bottom: 2px solid #00a8ff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 8px 8px 0 0;
-    }
-  .dash-header h3 { color: #fff; font-size: 20px; }
-  .dash-header h3 span { color: #00a8ff; }
-  .logout-btn {
-      background: #40444b; border: none; color: #fff;
-      padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600;
-    }
-  .dash-body { padding: 28px; color: #fff; }
-  .toolbar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-  .toolbar input,.toolbar select {
-      flex: 1; min-width: 150px; padding: 12px 14px;
-      background: #1e2124; border: 2px solid #40444b;
-      border-radius: 6px; color: #dcddde; height: 44px;
-    }
-  .add-btn {
-      padding: 12px 24px; background: #00a8ff; border: none;
-      border-radius: 6px; color: #fff; font-weight: 700;
-      cursor: pointer; height: 44px;
-    }
-  .accounts-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-  .accounts-table th {
-      text-align: left; padding: 14px; background: #1a1d21;
-      font-size: 11px; text-transform: uppercase; color: #949ba4;
-      border-bottom: 2px solid #40444b;
-    }
-  .accounts-table td {
-      padding: 16px 14px; border-bottom: 1px solid #3a3f44;
-      color: #dcddde; font-size: 14px;
-    }
-  .status { padding: 5px 12px; border-radius: 12px; font-size: 11px; font-weight: 700; }
-  .status-safe { background: #3ba55d; color: #fff; }
-  .status-risk { background: #faa61a; color: #000; }
-  .status-compromised { background: #ed4245; color: #fff; }
-  .action-btns { display: flex; gap: 8px; }
-  .copy-btn,.delete-btn {
-      border: none; padding: 8px 14px; border-radius: 6px;
-      cursor: pointer; font-size: 13px; font-weight: 600;
-    }
-  .copy-btn { background: #40444b; color: #fff; }
-  .delete-btn { background: #ed4245; color: #fff; }
-  .empty-state { text-align: center; padding: 60px 20px; color: #72767d; }
-  .modal {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.85); display: flex; justify-content: center;
-      align-items: center; z-index: 100; padding: 20px;
-    }
-  .modal-content {
-      background: #2c2f33; padding: 32px; border-radius: 8px;
-      width: 100%; max-width: 480px; border: 1px solid #3a3f44;
-    }
-  .modal-content h4 { color: #fff; margin-bottom: 24px; font-size: 22px; }
-  .modal-content input,.modal-content select,.modal-content textarea {
-      width: 100%; padding: 12px 14px; background: #1e2124; border: 2px solid #40444b;
-      border-radius: 6px; color: #dcddde; margin-bottom: 16px; font-family: inherit;
-    }
-  .modal-btns { display: flex; gap: 12px; margin-top: 8px; }
-  .modal-btns button {
-      flex: 1; padding: 12px; border-radius: 6px; cursor: pointer;
-      font-weight: 700; height: 46px; border: none;
-    }
-  .btn-save { background: #00a8ff; color: #fff; }
-  .btn-cancel { background: #40444b; color: #fff; }
+    body { background:#1a1d21; font-family:Arial; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; padding:20px; }
+  .login-card { background:#2c2f33; width:100%; max-width:400px; border-radius:8px; padding:40px 32px; }
+  .brand-title { color:#00a8ff; font-size:36px; font-weight:800; text-align:center; margin-bottom:8px; }
+  .admin-text { color:#ffffff; font-size:20px; text-align:center; margin-bottom:32px; }
+  .form-input { width:100%; padding:12px 14px; background:#1e2124; border:2px solid #40444b; border-radius:6px; color:#dcddde; font-size:16px; box-sizing:border-box; margin-bottom:16px; }
+  .login-button { width:100%; padding:12px; background:#00a8ff; border:none; border-radius:6px; color:#ffffff; font-size:16px; font-weight:700; cursor:pointer; }
+  .error-text { color:#ed4245; font-size:14px; text-align:center; margin-top:16px; min-height:20px; }
+  .hidden { display:none; }
+  .dashboard { background:#2c2f33; width:100%; max-width:900px; border-radius:8px; color:#fff; }
+  .dash-header { background:#1a1d21; padding:20px 28px; border-bottom:2px solid #00a8ff; display:flex; justify-content:space-between; align-items:center; }
+  .dash-body { padding:28px; }
   </style>
 </head>
 <body>
   <div class="login-card" id="login-box">
     <div class="brand-title">NULLDEFENDER</div>
     <div class="admin-text">Admin Login</div>
-
-    <label class="form-label">Username</label>
-    <input type="text" class="form-input" value="Admin Username" disabled>
-
-    <label class="form-label">Password</label>
-    <div class="password-wrapper">
-      <input type="password" class="form-input" id="password" placeholder="Password">
-      <span class="eye-icon" onclick="togglePassword()">👁️</span>
-    </div>
-
-    <button class="login-button" onclick="unlock()">Log In</button>
+    <input type="email" class="form-input" id="email" placeholder="Email">
+    <input type="password" class="form-input" id="password" placeholder="Password">
+    <button class="login-button" onclick="login()">Log In</button>
     <p class="error-text" id="error"></p>
   </div>
 
   <div class="dashboard hidden" id="vault-content">
     <div class="dash-header">
-      <h3>🛡️ <span>NullDefender</span> Database</h3>
-      <button class="logout-btn" onclick="logout()">Log Out</button>
+      <h3 style="margin:0;">🛡️ <span style="color:#00a8ff;">NullDefender</span> Database</h3>
+      <button onclick="logout()" style="background:#40444b; border:none; color:#fff; padding:10px 20px; border-radius:6px; cursor:pointer;">Log Out</button>
     </div>
     <div class="dash-body">
-      <div class="toolbar">
-        <input type="text" id="search" placeholder="Search username..." oninput="renderTable()">
-        <select id="filter-status" onchange="renderTable()">
-          <option value="all">All Status</option>
-          <option value="Safe">Safe</option>
-          <option value="At Risk">At Risk</option>
-          <option value="Compromised">Compromised</option>
-        </select>
-        <button class="add-btn" onclick="openModal()">+ Add Account</button>
-      </div>
-
-      <table class="accounts-table">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Owner / Notes</th>
-            <th>Date Added</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="accounts-body"></tbody>
-      </table>
-      <div id="empty-state" class="empty-state hidden">
-        <h4>No accounts yet</h4>
-        <p style="margin-top: 8px;">Click "Add Account" to start</p>
-      </div>
+      <h2 style="margin-top:0;">Welcome! Naka-login ka na.</h2>
+      <p>Dito mo na ilagay yung Roblox accounts na prinoprotektahan mo.</p>
     </div>
   </div>
 
-  <div class="modal hidden" id="modal">
-    <div class="modal-content">
-      <h4 id="modal-title">Add Protected Account</h4>
-      <input type="text" id="modal-username" placeholder="Roblox Username">
-      <input type="text" id="modal-owner" placeholder="Owner / Real Name">
-      <select id="modal-status">
-        <option value="Safe">Safe - Protected</option>
-        <option value="At Risk">At Risk - Monitor</option>
-        <option value="Compromised">Compromised - Action Needed</option>
-      </select>
-      <textarea id="modal-notes" rows="3" placeholder="Notes..."></textarea>
-      <div class="modal-btns">
-        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-        <button class="btn-save" onclick="saveAccount()">Save Account</button>
-      </div>
-    </div>
-  </div>
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
-<script>
-  const CORRECT_PASS = "wilbert123";
-  let editIndex = null;
-
-  if(localStorage.getItem("nd_session") === "true") {
-    showDashboard();
-    renderTable();
-  }
-
-  function unlock() {
-    const pass = document.getElementById("password").value;
-    if(pass === CORRECT_PASS) {
-      localStorage.setItem("nd_session", "true");
-      showDashboard();
-      renderTable();
-    } else {
-      document.getElementById("error").innerText = "Wrong password. Please try again.";
-    }
-  }
-
-  function logout() {
-    localStorage.removeItem("nd_session");
-    document.getElementById("login-box").classList.remove("hidden");
-    document.getElementById("vault-content").classList.add("hidden");
-    document.getElementById("password").value = "";
-  }
-
-  function showDashboard() {
-    document.getElementById("login-box").classList.add("hidden");
-    document.getElementById("vault-content").classList.remove("hidden");
-  }
-
-  function togglePassword() {
-    const input = document.getElementById("password");
-    input.type = input.type === "password"? "text" : "password";
-  }
-
-  function getAccounts() {
-    return JSON.parse(localStorage.getItem("nd_accounts") || "[]");
-  }
-
-  function saveAccounts(accounts) {
-    localStorage.setItem("nd_accounts", JSON.stringify(accounts));
-  }
-
-  function renderTable() {
-    const accounts = getAccounts();
-    const search = document.getElementById("search").value.toLowerCase();
-    const filterStatus = document.getElementById("filter-status").value;
-
-    const filtered = accounts.filter(acc => {
-      const matchSearch = acc.username.toLowerCase().includes(search) || acc.owner.toLowerCase().includes(search);
-      const matchStatus = filterStatus === "all" || acc.status === filterStatus;
-      return matchSearch && matchStatus;
-    });
-
-    const tbody = document.getElementById("accounts-body");
-    const emptyState = document.getElementById("empty-state");
-    tbody.innerHTML = "";
-
-    if(filtered.length === 0) {
-      emptyState.classList.remove("hidden");
-    } else {
-      emptyState.classList.add("hidden");
-      filtered.forEach((acc) => {
-        const realIndex = accounts.indexOf(acc);
-        const tr = document.createElement("tr");
-        const statusClass = acc.status === "Safe"? "status-safe" : acc.status === "At Risk"? "status-risk" : "status-compromised";
-        tr.innerHTML = `
-          <td><strong>${acc.username}</strong></td>
-          <td>${acc.owner}<br><small style="color:#72767d">${acc.notes || ''}</small></td>
-          <td>${acc.date}</td>
-          <td><span class="status ${statusClass}">${acc.status}</span></td>
-          <td>
-            <div class="action-btns">
-              <button class="copy-btn" onclick="copyUser('${acc.username}')">Copy</button>
-              <button class="delete-btn" onclick="deleteAccount(${realIndex})">Delete</button>
-            </div>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-  }
-
-  function openModal(index = null) {
-    editIndex = index;
-    const modal = document.getElementById("modal");
-    const title = document.getElementById("modal-title");
-
-    if(index!== null) {
-      const acc = getAccounts()[index];
-      document.getElementById("modal-username").value = acc.username;
-      document.getElementById("modal-owner").value = acc.owner;
-      document.getElementById("modal-status").value = acc.status;
-      document.getElementById("modal-notes").value = acc.notes;
-      title.innerText = "Edit Account";
-    } else {
-      document.getElementById("modal-username").value = "";
-      document.getElementById("modal-owner").value = "";
-      document.getElementById("modal-status").value = "Safe";
-      document.getElementById("modal-notes").value = "";
-      title.innerText = "Add Protected Account";
-    }
-    modal.classList.remove("hidden");
-  }
-
-  function closeModal() {
-    document.getElementById("modal").classList.add("hidden");
-  }
-
-  function saveAccount() {
-    const username = document.getElementById("modal-username").value.trim();
-    const owner = document.getElementById("modal-owner").value.trim();
-    const status = document.getElementById("modal-status").value;
-    const notes = document.getElementById("modal-notes").value.trim();
-
-    if(!username) { alert("Username required"); return; }
-
-    const accounts = getAccounts();
-    const date = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-
-    if(editIndex!== null) {
-      accounts[editIndex] = {...accounts[editIndex], username, owner, status, notes };
-    } else {
-      accounts.unshift({ username, owner, status, notes, date });
-    }
-
-    saveAccounts(accounts);
-    closeModal();
-    renderTable();
-  }
-
-  function deleteAccount(index) {
-    if(!confirm("Delete this account?")) return;
-    const accounts = getAccounts();
-    accounts.splice(index, 1);
-    saveAccounts(accounts);
-    renderTable();
-  }
-
-  function copyUser(username) {
-    navigator.clipboard.writeText(username).then(() => {
-      alert(`Copied: ${username}`);
-    });
-  }
-
-  document.getElementById("password").addEventListener("keypress", e => {
-    if (e.key === "Enter") unlock();
-  });
-</script>
-</body>
-</html>
+  // PALITAN MO TO NG SARILI MONG FIREBASE CONFIG
+  const firebaseConfig = {
+    apiKey: "AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    authDomain: "your-project.firebaseapp.com",
+    projectId: "your-project",
+    storageBucket: "your-project.appspot.com",
+    messagingSenderId: "123456789",
+    appId:
