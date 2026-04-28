@@ -2,52 +2,185 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>NullDefender - Login</title>
+  <title>NullDefender</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { background:#1a1d21; font-family:Arial; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; padding:20px; }
-  .login-card { background:#2c2f33; width:100%; max-width:400px; border-radius:8px; padding:40px 32px; }
-  .brand-title { color:#00a8ff; font-size:36px; font-weight:800; text-align:center; margin-bottom:8px; }
-  .admin-text { color:#ffffff; font-size:20px; text-align:center; margin-bottom:32px; }
-  .form-input { width:100%; padding:12px 14px; background:#1e2124; border:2px solid #40444b; border-radius:6px; color:#dcddde; font-size:16px; box-sizing:border-box; margin-bottom:16px; }
-  .login-button { width:100%; padding:12px; background:#00a8ff; border:none; border-radius:6px; color:#ffffff; font-size:16px; font-weight:700; cursor:pointer; }
-  .error-text { color:#ed4245; font-size:14px; text-align:center; margin-top:16px; min-height:20px; }
-  .hidden { display:none; }
-  .dashboard { background:#2c2f33; width:100%; max-width:900px; border-radius:8px; color:#fff; }
-  .dash-header { background:#1a1d21; padding:20px 28px; border-bottom:2px solid #00a8ff; display:flex; justify-content:space-between; align-items:center; }
-  .dash-body { padding:28px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background:#1a1d21; font-family:Arial; min-height:100vh; display:flex; justify-content:center; align-items:center; padding:20px; }
+    
+    /* LOGIN */
+   .login-card { background:#2c2f33; width:100%; max-width:400px; border-radius:8px; padding:40px 32px; }
+   .brand-title { color:#00a8ff; font-size:36px; font-weight:800; text-align:center; margin-bottom:8px; }
+   .admin-text { color:#ffffff; font-size:20px; text-align:center; margin-bottom:32px; }
+   .form-label { display:block; color:#b9bbbe; font-size:14px; font-weight:600; margin-bottom:8px; margin-top:16px; }
+   .form-input { width:100%; padding:12px 14px; background:#1e2124; border:2px solid #40444b; border-radius:6px; color:#dcddde; font-size:16px; box-sizing:border-box; }
+   .form-input:focus { outline:none; border-color:#00a8ff; }
+   .login-button { width:100%; padding:12px; background:#00a8ff; border:none; border-radius:6px; color:#ffffff; font-size:16px; font-weight:700; cursor:pointer; margin-top:24px; }
+   .login-button:hover { background:#0091db; }
+   .error-text { color:#ed4245; font-size:14px; text-align:center; margin-top:16px; min-height:20px; }
+    
+    /* DASHBOARD */
+   .hidden { display:none; }
+   .dashboard { background:#2c2f33; width:100%; max-width:900px; border-radius:8px; }
+   .dash-header { background:#1a1d21; padding:20px 28px; border-bottom:2px solid #00a8ff; display:flex; justify-content:space-between; align-items:center; border-radius:8px 8px 0 0; }
+   .dash-header h3 { color:#fff; font-size:20px; margin:0; }
+   .dash-header h3 span { color:#00a8ff; }
+   .logout-btn { background:#40444b; border:none; color:#fff; padding:10px 20px; border-radius:6px; cursor:pointer; font-weight:600; }
+   .logout-btn:hover { background:#ed4245; }
+   .dash-body { padding:28px; }
+   .toolbar { display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+   .toolbar input { flex:1; min-width:200px; padding:12px 14px; background:#1e2124; border:2px solid #40444b; border-radius:6px; color:#dcddde; }
+   .add-btn { padding:12px 24px; background:#00a8ff; border:none; border-radius:6px; color:#fff; font-weight:700; cursor:pointer; }
+   .add-btn:hover { background:#0091db; }
+   .account-card { background:#1e2124; padding:16px; border-radius:6px; margin-bottom:12px; border-left:3px solid #00a8ff; display:flex; justify-content:space-between; align-items:center; }
+   .account-info { color:#dcddde; }
+   .account-info strong { font-size:16px; color:#fff; }
+   .account-info small { color:#949ba4; display:block; margin-top:4px; }
+   .delete-btn { background:#ed4245; border:none; color:#fff; padding:8px 16px; border-radius:6px; cursor:pointer; font-weight:600; }
+   .empty-text { text-align:center; color:#72767d; padding:60px 20px; }
+   .badge { background:#00a8ff; color:#000; font-size:10px; padding:2px 8px; border-radius:10px; font-weight:700; margin-left:8px; }
   </style>
 </head>
 <body>
+  <!-- LOGIN SCREEN -->
   <div class="login-card" id="login-box">
     <div class="brand-title">NULLDEFENDER</div>
     <div class="admin-text">Admin Login</div>
-    <input type="email" class="form-input" id="email" placeholder="Email">
-    <input type="password" class="form-input" id="password" placeholder="Password">
-    <button class="login-button" onclick="login()">Log In</button>
+
+    <label class="form-label">Username</label>
+    <input type="text" class="form-input" value="Admin" disabled>
+
+    <label class="form-label">Password</label>
+    <input type="password" class="form-input" id="password" placeholder="Enter password">
+
+    <button class="login-button" onclick="unlock()">Log In</button>
     <p class="error-text" id="error"></p>
   </div>
 
+  <!-- DASHBOARD LOOB - ANDITO YUNG MGA ROBLOX ACCOUNTS -->
   <div class="dashboard hidden" id="vault-content">
     <div class="dash-header">
-      <h3 style="margin:0;">🛡️ <span style="color:#00a8ff;">NullDefender</span> Database</h3>
-      <button onclick="logout()" style="background:#40444b; border:none; color:#fff; padding:10px 20px; border-radius:6px; cursor:pointer;">Log Out</button>
+      <h3>🛡️ <span>NullDefender</span> Protected Accounts</h3>
+      <button class="logout-btn" onclick="logout()">Log Out</button>
     </div>
     <div class="dash-body">
-      <h2 style="margin-top:0;">Welcome! Naka-login ka na.</h2>
-      <p>Dito mo na ilagay yung Roblox accounts na prinoprotektahan mo.</p>
+      <div class="toolbar">
+        <input type="text" id="new-username" placeholder="Roblox Username">
+        <input type="text" id="new-notes" placeholder="Owner / Notes">
+        <button class="add-btn" onclick="addAccount()">+ Add Account</button>
+      </div>
+      <div id="accounts-list"></div>
     </div>
   </div>
 
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+<script>
+  // === PALITAN MO TONG PASSWORD ===
+  const CORRECT_PASS = "wilbert123";
+  
+  // === ANDITO YUNG MGA ROBLOX USERNAME NA PRINOPROTEKTAHAN MO ===
+  // Dagdag/bawas ka dito bago mo i-commit sa GitHub
+  const DEFAULT_ACCOUNTS = [
+    { username: "PlayerOne123", notes: "Main account - Added: April 2026" },
+    { username: "AltAccount99", notes: "Kaibigan ko - Status: Safe" },
+    { username: "UserExample", notes: "Protected since March 2026" }
+  ];
 
-  // PALITAN MO TO NG SARILI MONG FIREBASE CONFIG
-  const firebaseConfig = {
-    apiKey: "AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    authDomain: "your-project.firebaseapp.com",
-    projectId: "your-project",
-    storageBucket: "your-project.appspot.com",
-    messagingSenderId: "123456789",
-    appId:
+  // === WAG MO NA GALAWIN TONG SA BABA ===
+  if(localStorage.getItem("nd_session") === "true") {
+    showDashboard();
+    loadAccounts();
+  }
+
+  function unlock() {
+    const pass = document.getElementById("password").value;
+    if(pass === CORRECT_PASS) {
+      localStorage.setItem("nd_session", "true");
+      showDashboard();
+      loadAccounts();
+    } else {
+      document.getElementById("error").innerText = "Wrong password";
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem("nd_session");
+    document.getElementById("login-box").classList.remove("hidden");
+    document.getElementById("vault-content").classList.add("hidden");
+    document.getElementById("password").value = "";
+    document.getElementById("error").innerText = "";
+  }
+
+  function showDashboard() {
+    document.getElementById("login-box").classList.add("hidden");
+    document.getElementById("vault-content").classList.remove("hidden");
+  }
+
+  function getAccounts() {
+    const saved = localStorage.getItem("nd_accounts");
+    if(!saved) {
+      localStorage.setItem("nd_accounts", JSON.stringify(DEFAULT_ACCOUNTS));
+      return DEFAULT_ACCOUNTS;
+    }
+    return JSON.parse(saved);
+  }
+
+  function saveAccounts(accounts) {
+    localStorage.setItem("nd_accounts", JSON.stringify(accounts));
+  }
+
+  function loadAccounts() {
+    const accounts = getAccounts();
+    const list = document.getElementById("accounts-list");
+    list.innerHTML = "";
+    
+    if(accounts.length === 0) {
+      list.innerHTML = "<div class='empty-text'>No protected accounts yet.<br>Add one above.</div>";
+      return;
+    }
+
+    accounts.forEach((acc, index) => {
+      const div = document.createElement("div");
+      div.className = "account-card";
+      div.innerHTML = `
+        <div class="account-info">
+          <strong>${acc.username} <span class="badge">PROTECTED</span></strong>
+          <small>${acc.notes || 'No notes'}</small>
+        </div>
+        <button class="delete-btn" onclick="deleteAccount(${index})">Delete</button>
+      `;
+      list.appendChild(div);
+    });
+  }
+
+  function addAccount() {
+    const username = document.getElementById("new-username").value.trim();
+    const notes = document.getElementById("new-notes").value.trim();
+    
+    if(!username) { 
+      alert("Lagay mo muna username"); 
+      return; 
+    }
+
+    const accounts = getAccounts();
+    accounts.unshift({ username, notes });
+    saveAccounts(accounts);
+    
+    document.getElementById("new-username").value = "";
+    document.getElementById("new-notes").value = "";
+    loadAccounts();
+  }
+
+  function deleteAccount(index) {
+    if(!confirm("Tanggalin to sa protected list?")) return;
+    const accounts = getAccounts();
+    accounts.splice(index, 1);
+    saveAccounts(accounts);
+    loadAccounts();
+  }
+
+  document.getElementById("password").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") unlock();
+  });
+</script>
+</body>
+</html>
