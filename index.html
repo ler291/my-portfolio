@@ -1,72 +1,277 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NullDefender Vault</title>
+  <title>Login - NullDefender</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
-    .box { background: #161b22; padding: 24px; border-radius: 8px; width: 100%; max-width: 400px; border: 1px solid #30363d; }
-    h3 { margin-top: 0; color: white; text-align: center; }
-    input, textarea { width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px; border: 1px solid #30363d; background: #0d1117; color: white; box-sizing: border-box; font-family: inherit; }
-    button { width: 100%; padding: 10px; background: #238636; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 8px; }
-    button.delete { background: #da3633; font-size: 12px; padding: 4px 8px; width: auto; margin: 0; }
-    button.logout { background: #21262d; border: 1px solid #30363d; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      background: #232527; 
+      color: #fff; 
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      min-height: 100vh; 
+      padding: 20px;
+    }
+    .login-container { 
+      background: #393b3d; 
+      width: 100%; 
+      max-width: 400px; 
+      border-radius: 8px; 
+      overflow: hidden;
+      border: 1px solid #565a5c;
+    }
+    .login-header {
+      background: #232527;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #565a5c;
+    }
+    .roblox-logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+    .roblox-logo span { color: #fff; }
+    .login-body { padding: 24px; }
+    .login-body h2 { 
+      font-size: 20px; 
+      font-weight: 700; 
+      margin-bottom: 20px; 
+      text-align: center;
+    }
+    .input-group { margin-bottom: 16px; }
+    .input-group label { 
+      display: block; 
+      font-size: 12px; 
+      font-weight: 600; 
+      margin-bottom: 6px; 
+      color: #bdbebe;
+      text-transform: uppercase;
+    }
+    .input-group input { 
+      width: 100%; 
+      padding: 8px 12px; 
+      background: #232527; 
+      border: 1px solid #565a5c; 
+      border-radius: 4px; 
+      color: #fff; 
+      font-size: 16px;
+      height: 38px;
+    }
+    .input-group input:focus { 
+      outline: none; 
+      border-color: #00a2ff; 
+    }
+    .login-btn { 
+      width: 100%; 
+      padding: 8px; 
+      background: #393b3d; 
+      border: 1px solid #565a5c; 
+      border-radius: 4px; 
+      color: #bdbebe; 
+      font-size: 16px; 
+      font-weight: 600; 
+      cursor: pointer; 
+      height: 38px;
+      margin-top: 8px;
+    }
+    .login-btn:hover { background: #46494c; }
+    .login-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .error-msg { 
+      color: #f44336; 
+      font-size: 14px; 
+      text-align: center; 
+      margin-top: 12px; 
+      min-height: 20px;
+    }
+    .footer-text { 
+      text-align: center; 
+      font-size: 12px; 
+      color: #bdbebe; 
+      margin-top: 20px;
+      padding: 0 24px 24px 24px;
+    }
+    .footer-text a { color: #00a2ff; text-decoration: none; }
+    
+    /* Vault Content */
     .hidden { display: none; }
-    #vault-content { text-align: left; }
-    .note { background: #0d1117; border: 1px solid #30363d; padding: 12px; border-radius: 6px; margin: 10px 0; }
-    .note-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .note-title { font-weight: 600; color: white; }
-    .note-body { font-size: 14px; white-space: pre-wrap; word-wrap: break-word; }
-    .footer-text { color: #f85149; font-size: 12px; text-align: center; margin-bottom: 12px; }
-    #error { color: #f85149; font-size: 12px; text-align: center; min-height: 16px; }
+    .vault-container { 
+      background: #393b3d; 
+      width: 100%; 
+      max-width: 500px; 
+      border-radius: 8px; 
+      border: 1px solid #565a5c;
+    }
+    .vault-header { 
+      background: #232527; 
+      padding: 16px 20px; 
+      border-bottom: 1px solid #565a5c; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center;
+    }
+    .vault-header h3 { font-size: 18px; }
+    .logout-btn { 
+      background: #232527; 
+      border: 1px solid #565a5c; 
+      color: #fff; 
+      padding: 6px 12px; 
+      border-radius: 4px; 
+      cursor: pointer; 
+      font-size: 14px;
+    }
+    .vault-body { padding: 20px; }
+    .vault-body h4 { 
+      color: #00a2ff; 
+      margin: 16px 0 10px 0; 
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+    .vault-body input, .vault-body textarea { 
+      width: 100%; 
+      padding: 8px 12px; 
+      background: #232527; 
+      border: 1px solid #565a5c; 
+      border-radius: 4px; 
+      color: #fff; 
+      margin: 6px 0; 
+      font-family: inherit;
+    }
+    .add-btn { 
+      width: 100%; 
+      padding: 8px; 
+      background: #00a2ff; 
+      border: none; 
+      border-radius: 4px; 
+      color: #000; 
+      font-weight: 700; 
+      cursor: pointer; 
+      margin: 8px 0 16px 0;
+    }
+    .entry { 
+      background: #232527; 
+      border: 1px solid #565a5c; 
+      padding: 12px; 
+      border-radius: 4px; 
+      margin: 8px 0; 
+    }
+    .entry-header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-bottom: 6px; 
+    }
+    .entry-title { font-weight: 700; }
+    .delete-btn { 
+      background: #f44336; 
+      border: none; 
+      color: white; 
+      padding: 4px 8px; 
+      border-radius: 4px; 
+      cursor: pointer; 
+      font-size: 12px;
+    }
+    .badge { 
+      background: #00a2ff; 
+      color: #000; 
+      font-size: 10px; 
+      padding: 2px 6px; 
+      border-radius: 10px; 
+      margin-left: 6px; 
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
-  <div class="box" id="login-box">
-    <h3>🛡️ NullDefender Vault</h3>
-    <p class="footer-text">FOR PERSONAL USE ONLY - BY WILBERT</p>
-    <input type="password" id="password" placeholder="Enter password">
-    <button onclick="unlock()">Unlock</button>
-    <p id="error"></p>
+  <!-- LOGIN SCREEN - KAMUKHA NG ROBLOX -->
+  <div class="login-container" id="login-box">
+    <div class="login-header">
+      <div class="roblox-logo">🛡️ <span>NullDefender</span></div>
+    </div>
+    <div class="login-body">
+      <h2>Log In to Your Account</h2>
+      <div class="input-group">
+        <label>Username</label>
+        <input type="text" id="username" value="wilbert" disabled>
+      </div>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter your password">
+      </div>
+      <button class="login-btn" onclick="unlock()">Log In</button>
+      <p class="error-msg" id="error"></p>
+    </div>
+    <div class="footer-text">
+      This is a private vault. Not affiliated with Roblox Corporation.<br>
+      FOR PERSONAL USE ONLY
+    </div>
   </div>
 
-  <div class="box hidden" id="vault-content">
-    <h3>Your Vault</h3>
-    
-    <input type="text" id="note-title" placeholder="Title: FB, Gmail, etc.">
-    <textarea id="note-body" rows="2" placeholder="Username / Password / Notes"></textarea>
-    <button onclick="addNote()">+ Add to Vault</button>
-    
-    <div id="notes-list" style="margin-top: 20px;"></div>
-    
-    <button class="logout" onclick="logout()" style="margin-top: 20px;">Logout</button>
+  <!-- VAULT CONTENT -->
+  <div class="vault-container hidden" id="vault-content">
+    <div class="vault-header">
+      <h3>🛡️ Protected Accounts</h3>
+      <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+    <div class="vault-body">
+      <h4>Roblox Usernames</h4>
+      <input type="text" id="rbx-user" placeholder="Roblox Username">
+      <textarea id="rbx-note" rows="2" placeholder="Notes: Status, owner, date"></textarea>
+      <button class="add-btn" onclick="addRbx()">Add Account</button>
+      <div id="rbx-list"></div>
+
+      <h4>Other Notes</h4>
+      <input type="text" id="note-title" placeholder="Title">
+      <textarea id="note-body" rows="2" placeholder="Details"></textarea>
+      <button class="add-btn" onclick="addNote()">Add Note</button>
+      <div id="notes-list"></div>
+    </div>
   </div>
 
 <script>
-  const CORRECT_PASS = "wilbert123"; // Palitan mo to
+  // === CONFIG MO DITO ===
+  const CORRECT_PASS = "wilbert123"; // Palitan mo to ng password na gusto mo
+  const DEFAULT_RBX = [
+    { title: "PlayerOne", body: "Main account - Protected since April 2026" },
+    { title: "AltAccount22", body: "Kaibigan ko - Status: Safe" }
+  ];
+  // === END CONFIG ===
 
-  // Check kung naka-login na
-  if(localStorage.getItem("vault_session") === "true") {
+  if(localStorage.getItem("nd_session") === "true") {
     showVault();
-    loadNotes();
+    initData();
+    loadAll();
   }
 
   function unlock() {
     const pass = document.getElementById("password").value;
-    if(pass === CORRECT_PASS) {
-      localStorage.setItem("vault_session", "true");
-      showVault();
-      loadNotes();
-    } else {
-      document.getElementById("error").innerText = "Wrong password";
-    }
+    const btn = document.querySelector('.login-btn');
+    btn.disabled = true;
+    btn.innerText = "Logging in...";
+    
+    setTimeout(() => { // Fake loading para realistic
+      if(pass === CORRECT_PASS) {
+        localStorage.setItem("nd_session", "true");
+        showVault();
+        initData();
+        loadAll();
+      } else {
+        document.getElementById("error").innerText = "Incorrect username or password.";
+        btn.disabled = false;
+        btn.innerText = "Log In";
+      }
+    }, 800);
   }
 
   function logout() {
-    localStorage.removeItem("vault_session");
+    localStorage.removeItem("nd_session");
     document.getElementById("login-box").classList.remove("hidden");
     document.getElementById("vault-content").classList.add("hidden");
     document.getElementById("password").value = "";
+    document.getElementById("error").innerText = "";
   }
 
   function showVault() {
@@ -74,64 +279,89 @@
     document.getElementById("vault-content").classList.remove("hidden");
   }
 
-  // VAULT FUNCTIONS
-  function getNotes() {
-    return JSON.parse(localStorage.getItem("vault_notes") || "[]");
+  function initData() {
+    if(!localStorage.getItem("nd_rbx")) {
+      localStorage.setItem("nd_rbx", JSON.stringify(DEFAULT_RBX));
+    }
+    if(!localStorage.getItem("nd_notes")) {
+      localStorage.setItem("nd_notes", JSON.stringify([]));
+    }
   }
 
-  function saveNotes(notes) {
-    localStorage.setItem("vault_notes", JSON.stringify(notes));
+  function getData(key) {
+    return JSON.parse(localStorage.getItem(key) || "[]");
   }
 
-  function loadNotes() {
-    const notes = getNotes();
-    const list = document.getElementById("notes-list");
+  function saveData(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  function loadAll() {
+    loadList("nd_rbx", "rbx-list", "rbx");
+    loadList("nd_notes", "notes-list", "note");
+  }
+
+  function loadList(storageKey, listId, type) {
+    const items = getData(storageKey);
+    const list = document.getElementById(listId);
     list.innerHTML = "";
     
-    if(notes.length === 0) {
-      list.innerHTML = "<p style='text-align: center; color: #7d8590; font-size: 14px;'>Empty vault. Add ka muna.</p>";
+    if(items.length === 0) {
+      list.innerHTML = "<p style='text-align: center; color: #7d8590; font-size: 14px;'>No entries.</p>";
       return;
     }
 
-    notes.forEach((note, index) => {
+    items.forEach((item, index) => {
       const div = document.createElement("div");
-      div.className = "note";
+      div.className = "entry";
       div.innerHTML = `
-        <div class="note-header">
-          <span class="note-title">${note.title}</span>
-          <button class="delete" onclick="deleteNote(${index})">Delete</button>
+        <div class="entry-header">
+          <span class="entry-title">${item.title} ${type === 'rbx' ? '<span class="badge">PROTECTED</span>' : ''}</span>
+          <button class="delete-btn" onclick="deleteItem('${storageKey}', ${index})">Delete</button>
         </div>
-        <div class="note-body">${note.body}</div>
+        <div>${item.body}</div>
       `;
       list.appendChild(div);
     });
   }
 
+  function addRbx() {
+    addItem("nd_rbx", "rbx-user", "rbx-note", "rbx-list", "rbx");
+  }
+
   function addNote() {
-    const title = document.getElementById("note-title").value.trim();
-    const body = document.getElementById("note-body").value.trim();
-    
-    if(!title || !body) {
-      alert("Lagyan mo muna ng title at laman");
-      return;
-    }
-
-    const notes = getNotes();
-    notes.unshift({ title, body }); // Add sa unahan
-    saveNotes(notes);
-    
-    document.getElementById("note-title").value = "";
-    document.getElementById("note-body").value = "";
-    loadNotes();
+    addItem("nd_notes", "note-title", "note-body", "notes-list", "note");
   }
 
-  function deleteNote(index) {
-    if(!confirm("Sure ka? Di na mababalik to.")) return;
-    const notes = getNotes();
-    notes.splice(index, 1);
-    saveNotes(notes);
-    loadNotes();
+  function addItem(storageKey, titleId, bodyId, listId, type) {
+    const title = document.getElementById(titleId).value.trim();
+    const body = document.getElementById(bodyId).value.trim();
+    
+    if(!title || !body) return;
+
+    const items = getData(storageKey);
+    items.unshift({ title, body });
+    saveData(storageKey, items);
+    
+    document.getElementById(titleId).value = "";
+    document.getElementById(bodyId).value = "";
+    loadList(storageKey, listId, type);
   }
+
+  function deleteItem(storageKey, index) {
+    if(!confirm("Delete this entry?")) return;
+    const items = getData(storageKey);
+    const type = storageKey === "nd_rbx" ? "rbx" : "note";
+    const listId = storageKey === "nd_rbx" ? "rbx-list" : "notes-list";
+    items.splice(index, 1);
+    saveData(storageKey, items);
+    loadList(storageKey, listId, type);
+  }
+
+  // Enter key para mag-login
+  document.getElementById("password").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") unlock();
+  });
 </script>
 </body>
 </html>
