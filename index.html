@@ -1,21 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>NullDefender Personal Vault</title>
-    <style>
-        body { background: #1a1a2e; color: white; font-family: Arial; }
-        .box { max-width: 400px; margin: 100px auto; padding: 20px; background: #16213e; border-radius: 10px; }
-        input { width: 100%; padding: 10px; margin: 10px 0; }
-        .warning { color: #ff6b6b; font-size: 12px; }
-    </style>
+  <title>NullDefender Vault</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { background: #0d1117; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    .box { background: #161b22; padding: 20px; border-radius: 8px; width: 300px; text-align: center; }
+    input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 6px; border: 1px solid #30363d; background: #0d1117; color: white; box-sizing: border-box; }
+    button { width: 100%; padding: 10px; background: #238636; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    .hidden { display: none; }
+    #vault-content { text-align: left; }
+  </style>
 </head>
 <body>
-    <div class="box">
-        <h2>🛡️ NullDefender Vault</h2>
-        <p class="warning">FOR PERSONAL USE ONLY - BY WILBERT</p>
-        <input type="password" placeholder="Master Password">
-        <button onclick="alert('This is offline only. Use Termux app.')">Unlock</button>
-        <p style="font-size:11px">This page does NOT save data. Use the Termux version.</p>
-    </div>
+  <div class="box" id="login-box">
+    <h3>🛡️ NullDefender Vault</h3>
+    <p style="color: #f85149; font-size: 12px;">FOR PERSONAL USE ONLY - BY WILBERT</p>
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="unlock()">Unlock</button>
+    <p id="error" style="color: #f85149; font-size: 12px;"></p>
+  </div>
+
+  <div class="box hidden" id="vault-content">
+    <h3>Welcome sa Vault</h3>
+    <p>Naka-login ka na. Hindi ka na hihingan ng password hanggang mag-logout ka.</p>
+    <button onclick="logout()" style="background: #da3633;">Logout</button>
+  </div>
+
+<script>
+  const CORRECT_PASS = "wilbert123"; // Palitan mo to ng password na gusto mo
+
+  // Check pag-load ng page kung naka-login na
+  if(localStorage.getItem("vault_session") === "true") {
+    showVault();
+  }
+
+  function unlock() {
+    const pass = document.getElementById("password").value;
+    if(pass === CORRECT_PASS) {
+      localStorage.setItem("vault_session", "true"); // Save session
+      showVault();
+    } else {
+      document.getElementById("error").innerText = "Wrong password";
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem("vault_session"); // Burahin session
+    document.getElementById("login-box").classList.remove("hidden");
+    document.getElementById("vault-content").classList.add("hidden");
+    document.getElementById("password").value = "";
+  }
+
+  function showVault() {
+    document.getElementById("login-box").classList.add("hidden");
+    document.getElementById("vault-content").classList.remove("hidden");
+  }
+</script>
 </body>
 </html>
