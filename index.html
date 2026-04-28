@@ -4,49 +4,66 @@
   <title>NullDefender Vault</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { background: #0d1117; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-    .box { background: #161b22; padding: 20px; border-radius: 8px; width: 300px; text-align: center; }
-    input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 6px; border: 1px solid #30363d; background: #0d1117; color: white; box-sizing: border-box; }
-    button { width: 100%; padding: 10px; background: #238636; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    body { background: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+    .box { background: #161b22; padding: 24px; border-radius: 8px; width: 100%; max-width: 400px; border: 1px solid #30363d; }
+    h3 { margin-top: 0; color: white; text-align: center; }
+    input, textarea { width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px; border: 1px solid #30363d; background: #0d1117; color: white; box-sizing: border-box; font-family: inherit; }
+    button { width: 100%; padding: 10px; background: #238636; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 8px; }
+    button.delete { background: #da3633; font-size: 12px; padding: 4px 8px; width: auto; margin: 0; }
+    button.logout { background: #21262d; border: 1px solid #30363d; }
     .hidden { display: none; }
     #vault-content { text-align: left; }
+    .note { background: #0d1117; border: 1px solid #30363d; padding: 12px; border-radius: 6px; margin: 10px 0; }
+    .note-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .note-title { font-weight: 600; color: white; }
+    .note-body { font-size: 14px; white-space: pre-wrap; word-wrap: break-word; }
+    .footer-text { color: #f85149; font-size: 12px; text-align: center; margin-bottom: 12px; }
+    #error { color: #f85149; font-size: 12px; text-align: center; min-height: 16px; }
   </style>
 </head>
 <body>
   <div class="box" id="login-box">
     <h3>🛡️ NullDefender Vault</h3>
-    <p style="color: #f85149; font-size: 12px;">FOR PERSONAL USE ONLY - BY WILBERT</p>
+    <p class="footer-text">FOR PERSONAL USE ONLY - BY WILBERT</p>
     <input type="password" id="password" placeholder="Enter password">
     <button onclick="unlock()">Unlock</button>
-    <p id="error" style="color: #f85149; font-size: 12px;"></p>
+    <p id="error"></p>
   </div>
 
   <div class="box hidden" id="vault-content">
-    <h3>Welcome sa Vault</h3>
-    <p>Naka-login ka na. Hindi ka na hihingan ng password hanggang mag-logout ka.</p>
-    <button onclick="logout()" style="background: #da3633;">Logout</button>
+    <h3>Your Vault</h3>
+    
+    <input type="text" id="note-title" placeholder="Title: FB, Gmail, etc.">
+    <textarea id="note-body" rows="2" placeholder="Username / Password / Notes"></textarea>
+    <button onclick="addNote()">+ Add to Vault</button>
+    
+    <div id="notes-list" style="margin-top: 20px;"></div>
+    
+    <button class="logout" onclick="logout()" style="margin-top: 20px;">Logout</button>
   </div>
 
 <script>
-  const CORRECT_PASS = "wilbert123"; // Palitan mo to ng password na gusto mo
+  const CORRECT_PASS = "wilbert123"; // Palitan mo to
 
-  // Check pag-load ng page kung naka-login na
+  // Check kung naka-login na
   if(localStorage.getItem("vault_session") === "true") {
     showVault();
+    loadNotes();
   }
 
   function unlock() {
     const pass = document.getElementById("password").value;
     if(pass === CORRECT_PASS) {
-      localStorage.setItem("vault_session", "true"); // Save session
+      localStorage.setItem("vault_session", "true");
       showVault();
+      loadNotes();
     } else {
       document.getElementById("error").innerText = "Wrong password";
     }
   }
 
   function logout() {
-    localStorage.removeItem("vault_session"); // Burahin session
+    localStorage.removeItem("vault_session");
     document.getElementById("login-box").classList.remove("hidden");
     document.getElementById("vault-content").classList.add("hidden");
     document.getElementById("password").value = "";
@@ -55,6 +72,65 @@
   function showVault() {
     document.getElementById("login-box").classList.add("hidden");
     document.getElementById("vault-content").classList.remove("hidden");
+  }
+
+  // VAULT FUNCTIONS
+  function getNotes() {
+    return JSON.parse(localStorage.getItem("vault_notes") || "[]");
+  }
+
+  function saveNotes(notes) {
+    localStorage.setItem("vault_notes", JSON.stringify(notes));
+  }
+
+  function loadNotes() {
+    const notes = getNotes();
+    const list = document.getElementById("notes-list");
+    list.innerHTML = "";
+    
+    if(notes.length === 0) {
+      list.innerHTML = "<p style='text-align: center; color: #7d8590; font-size: 14px;'>Empty vault. Add ka muna.</p>";
+      return;
+    }
+
+    notes.forEach((note, index) => {
+      const div = document.createElement("div");
+      div.className = "note";
+      div.innerHTML = `
+        <div class="note-header">
+          <span class="note-title">${note.title}</span>
+          <button class="delete" onclick="deleteNote(${index})">Delete</button>
+        </div>
+        <div class="note-body">${note.body}</div>
+      `;
+      list.appendChild(div);
+    });
+  }
+
+  function addNote() {
+    const title = document.getElementById("note-title").value.trim();
+    const body = document.getElementById("note-body").value.trim();
+    
+    if(!title || !body) {
+      alert("Lagyan mo muna ng title at laman");
+      return;
+    }
+
+    const notes = getNotes();
+    notes.unshift({ title, body }); // Add sa unahan
+    saveNotes(notes);
+    
+    document.getElementById("note-title").value = "";
+    document.getElementById("note-body").value = "";
+    loadNotes();
+  }
+
+  function deleteNote(index) {
+    if(!confirm("Sure ka? Di na mababalik to.")) return;
+    const notes = getNotes();
+    notes.splice(index, 1);
+    saveNotes(notes);
+    loadNotes();
   }
 </script>
 </body>
