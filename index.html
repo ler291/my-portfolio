@@ -1,186 +1,288 @@
 <!DOCTYPE html>
-<html>
+<html lang="tl">
 <head>
-  <meta charset="UTF-8">
-  <title>NullDefender</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background:#1a1d21; font-family:Arial; min-height:100vh; display:flex; justify-content:center; align-items:center; padding:20px; }
-    
-    /* LOGIN */
-   .login-card { background:#2c2f33; width:100%; max-width:400px; border-radius:8px; padding:40px 32px; }
-   .brand-title { color:#00a8ff; font-size:36px; font-weight:800; text-align:center; margin-bottom:8px; }
-   .admin-text { color:#ffffff; font-size:20px; text-align:center; margin-bottom:32px; }
-   .form-label { display:block; color:#b9bbbe; font-size:14px; font-weight:600; margin-bottom:8px; margin-top:16px; }
-   .form-input { width:100%; padding:12px 14px; background:#1e2124; border:2px solid #40444b; border-radius:6px; color:#dcddde; font-size:16px; box-sizing:border-box; }
-   .form-input:focus { outline:none; border-color:#00a8ff; }
-   .login-button { width:100%; padding:12px; background:#00a8ff; border:none; border-radius:6px; color:#ffffff; font-size:16px; font-weight:700; cursor:pointer; margin-top:24px; }
-   .login-button:hover { background:#0091db; }
-   .error-text { color:#ed4245; font-size:14px; text-align:center; margin-top:16px; min-height:20px; }
-    
-    /* DASHBOARD */
-   .hidden { display:none; }
-   .dashboard { background:#2c2f33; width:100%; max-width:900px; border-radius:8px; }
-   .dash-header { background:#1a1d21; padding:20px 28px; border-bottom:2px solid #00a8ff; display:flex; justify-content:space-between; align-items:center; border-radius:8px 8px 0 0; }
-   .dash-header h3 { color:#fff; font-size:20px; margin:0; }
-   .dash-header h3 span { color:#00a8ff; }
-   .logout-btn { background:#40444b; border:none; color:#fff; padding:10px 20px; border-radius:6px; cursor:pointer; font-weight:600; }
-   .logout-btn:hover { background:#ed4245; }
-   .dash-body { padding:28px; }
-   .toolbar { display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
-   .toolbar input { flex:1; min-width:200px; padding:12px 14px; background:#1e2124; border:2px solid #40444b; border-radius:6px; color:#dcddde; }
-   .add-btn { padding:12px 24px; background:#00a8ff; border:none; border-radius:6px; color:#fff; font-weight:700; cursor:pointer; }
-   .add-btn:hover { background:#0091db; }
-   .account-card { background:#1e2124; padding:16px; border-radius:6px; margin-bottom:12px; border-left:3px solid #00a8ff; display:flex; justify-content:space-between; align-items:center; }
-   .account-info { color:#dcddde; }
-   .account-info strong { font-size:16px; color:#fff; }
-   .account-info small { color:#949ba4; display:block; margin-top:4px; }
-   .delete-btn { background:#ed4245; border:none; color:#fff; padding:8px 16px; border-radius:6px; cursor:pointer; font-weight:600; }
-   .empty-text { text-align:center; color:#72767d; padding:60px 20px; }
-   .badge { background:#00a8ff; color:#000; font-size:10px; padding:2px 8px; border-radius:10px; font-weight:700; margin-left:8px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para sayo 💜</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+       .container {
+            max-width: 420px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+       .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 45px 35px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+       .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+        }
+       .emoji {
+            font-size: 56px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            display: inline-block;
+            transition: 0.3s;
+            animation: float 3s ease-in-out infinite;
+        }
+       .emoji:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+       .emoji:active {
+            transform: scale(0.9);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        h1 {
+            color: #1a1a1a;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+       .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+       .letter {
+            display: none;
+            text-align: left;
+            animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+       .letter.show {
+            display: block;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+       .letter p {
+            color: #2c2c2c;
+            line-height: 1.9;
+            margin: 18px 0;
+            font-size: 15px;
+            min-height: 20px;
+        }
+       .name {
+            background: linear-gradient(135deg, #e91e63, #9c27b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+       .divider {
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #e91e63, #9c27b0);
+            margin: 25px auto;
+            border-radius: 2px;
+        }
+       .btn {
+            background: linear-gradient(135deg, #e91e63, #9c27b0);
+            color: white;
+            border: none;
+            padding: 16px 36px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+        }
+       .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.6);
+        }
+       .btn:active {
+            transform: scale(0.98);
+        }
+       .signature {
+            text-align: right;
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+        }
+       .reply {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            border-radius: 16px;
+            color: #d63031;
+            font-weight: 600;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+       .reply.show {
+            display: block;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+       .hint {
+            color: #999;
+            font-size: 13px;
+            margin-top: 15px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+       .heart-particle {
+            position: fixed;
+            font-size: 20px;
+            opacity: 0;
+            animation: floatUp 4s ease-out forwards;
+            pointer-events: none;
+            z-index: 1;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+       .typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
 </head>
 <body>
-  <!-- LOGIN SCREEN -->
-  <div class="login-card" id="login-box">
-    <div class="brand-title">NULLDEFENDER</div>
-    <div class="admin-text">Admin Login</div>
+    <div class="container">
+        <div class="card">
+            <div class="emoji" id="emoji" onclick="revealLetter()">💌</div>
+            <h1>Hi, <span class="name">Crush</span></h1>
+            <p class="subtitle" id="subtitle">May sasabihin ako sayo...</p>
 
-    <label class="form-label">Username</label>
-    <input type="text" class="form-input" value="Admin" disabled>
+            <div class="letter" id="letter">
+                <div class="divider"></div>
+                <p id="p1"></p>
+                <p id="p2"></p>
+                <p id="p3"></p>
+                <p id="p4"></p>
+                <p id="p5" style="font-weight: 600; color: #1a1a1a;"></p>
 
-    <label class="form-label">Password</label>
-    <input type="password" class="form-input" id="password" placeholder="Enter password">
+                <div class="signature">
+                    — Yung naghihintay sayo 💜
+                </div>
 
-    <button class="login-button" onclick="unlock()">Log In</button>
-    <p class="error-text" id="error"></p>
-  </div>
+                <button class="btn" id="replyBtn" onclick="showReply()" style="display:none;">
+                    Na-miss mo din ba ako? 🥺
+                </button>
 
-  <!-- DASHBOARD LOOB - ANDITO YUNG MGA ROBLOX ACCOUNTS -->
-  <div class="dashboard hidden" id="vault-content">
-    <div class="dash-header">
-      <h3>🛡️ <span>NullDefender</span> Protected Accounts</h3>
-      <button class="logout-btn" onclick="logout()">Log Out</button>
-    </div>
-    <div class="dash-body">
-      <div class="toolbar">
-        <input type="text" id="new-username" placeholder="Roblox Username">
-        <input type="text" id="new-notes" placeholder="Owner / Notes">
-        <button class="add-btn" onclick="addAccount()">+ Add Account</button>
-      </div>
-      <div id="accounts-list"></div>
-    </div>
-  </div>
+                <div class="reply" id="reply">
+                    Alam ko naman eh 😌<br>
+                    Chat mo na ko dali. Miss na rin kita.
+                </div>
+            </div>
 
-<script>
-  // === PALITAN MO TONG PASSWORD ===
-  const CORRECT_PASS = "wilbert123";
-  
-  // === ANDITO YUNG MGA ROBLOX USERNAME NA PRINOPROTEKTAHAN MO ===
-  // Dagdag/bawas ka dito bago mo i-commit sa GitHub
-  const DEFAULT_ACCOUNTS = [
-    { username: "PlayerOne123", notes: "Main account - Added: April 2026" },
-    { username: "AltAccount99", notes: "Kaibigan ko - Status: Safe" },
-    { username: "UserExample", notes: "Protected since March 2026" }
-  ];
-
-  // === WAG MO NA GALAWIN TONG SA BABA ===
-  if(localStorage.getItem("nd_session") === "true") {
-    showDashboard();
-    loadAccounts();
-  }
-
-  function unlock() {
-    const pass = document.getElementById("password").value;
-    if(pass === CORRECT_PASS) {
-      localStorage.setItem("nd_session", "true");
-      showDashboard();
-      loadAccounts();
-    } else {
-      document.getElementById("error").innerText = "Wrong password";
-    }
-  }
-
-  function logout() {
-    localStorage.removeItem("nd_session");
-    document.getElementById("login-box").classList.remove("hidden");
-    document.getElementById("vault-content").classList.add("hidden");
-    document.getElementById("password").value = "";
-    document.getElementById("error").innerText = "";
-  }
-
-  function showDashboard() {
-    document.getElementById("login-box").classList.add("hidden");
-    document.getElementById("vault-content").classList.remove("hidden");
-  }
-
-  function getAccounts() {
-    const saved = localStorage.getItem("nd_accounts");
-    if(!saved) {
-      localStorage.setItem("nd_accounts", JSON.stringify(DEFAULT_ACCOUNTS));
-      return DEFAULT_ACCOUNTS;
-    }
-    return JSON.parse(saved);
-  }
-
-  function saveAccounts(accounts) {
-    localStorage.setItem("nd_accounts", JSON.stringify(accounts));
-  }
-
-  function loadAccounts() {
-    const accounts = getAccounts();
-    const list = document.getElementById("accounts-list");
-    list.innerHTML = "";
-    
-    if(accounts.length === 0) {
-      list.innerHTML = "<div class='empty-text'>No protected accounts yet.<br>Add one above.</div>";
-      return;
-    }
-
-    accounts.forEach((acc, index) => {
-      const div = document.createElement("div");
-      div.className = "account-card";
-      div.innerHTML = `
-        <div class="account-info">
-          <strong>${acc.username} <span class="badge">PROTECTED</span></strong>
-          <small>${acc.notes || 'No notes'}</small>
+            <p class="hint" id="hint">Tap mo yung 💌</p>
         </div>
-        <button class="delete-btn" onclick="deleteAccount(${index})">Delete</button>
-      `;
-      list.appendChild(div);
-    });
-  }
+    </div>
 
-  function addAccount() {
-    const username = document.getElementById("new-username").value.trim();
-    const notes = document.getElementById("new-notes").value.trim();
-    
-    if(!username) { 
-      alert("Lagay mo muna username"); 
-      return; 
-    }
+    <script>
+        let revealed = false;
+        const messages = [
+            "Alam kong LDR tayo at ang hirap. Minsan naiisip ko kung worth it ba lahat ng paghihintay, ng pagka-miss, ng mga gabing mag-isa ako.",
+            "Pero tuwing nakakausap kita, tuwing tumatawa ka sa mga corny jokes ko, tuwing sinasabi mong \"ingat ka\" bago matulog...",
+            "Doon ko naaalala kung bakit kita pinipili araw-araw.",
+            "Kasi ikaw yung taong kahit malayo, nararamdaman kong nasa tabi ko. Ikaw yung peace ko sa magulong mundo.",
+            "Kaya kahit ilang kilometro pa yan, kahit gaano pa katagal... Ikaw pa rin. Lagi."
+        ];
 
-    const accounts = getAccounts();
-    accounts.unshift({ username, notes });
-    saveAccounts(accounts);
-    
-    document.getElementById("new-username").value = "";
-    document.getElementById("new-notes").value = "";
-    loadAccounts();
-  }
+        function revealLetter() {
+            if (revealed) return;
+            revealed = true;
 
-  function deleteAccount(index) {
-    if(!confirm("Tanggalin to sa protected list?")) return;
-    const accounts = getAccounts();
-    accounts.splice(index, 1);
-    saveAccounts(accounts);
-    loadAccounts();
-  }
+            document.getElementById('emoji').textContent = '💜';
+            document.getElementById('subtitle').style.display = 'none';
+            document.getElementById('hint').style.display = 'none';
+            document.getElementById('letter').classList.add('show');
 
-  document.getElementById("password").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") unlock();
-  });
-</script>
+            // Floating hearts effect
+            createHearts();
+
+            // Typewriter effect
+            typeWriter(0);
+        }
+
+        function typeWriter(index) {
+            if (index >= messages.length) {
+                document.getElementById('replyBtn').style.display = 'block';
+                return;
+            }
+
+            const p = document.getElementById('p' + (index + 1));
+            const text = messages[index];
+            let i = 0;
+            p.classList.add('typing');
+
+            const interval = setInterval(() => {
+                if (i < text.length) {
+                    p.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    p.classList.remove('typing');
+                    setTimeout(() => typeWriter(index + 1), 300);
+                }
+            }, 25);
+        }
+
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-particle';
+                    heart.innerHTML = ['💜','💕','❤️','💖','✨'][Math.floor(Math.random()*5)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    heart.style.fontSize = Math.random() * 10 + 15 + 'px';
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 4000);
+                }, i * 150);
+            }
+        }
+
+        function showReply() {
+            document.getElementById('reply').classList.add('show');
+            createHearts();
+        }
+    </script>
 </body>
 </html>
